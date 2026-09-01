@@ -1,0 +1,15 @@
+.git
+.github
+frontend
+deploy.sh
+scraper.py
+**/__pycache__/
+**/*.pyc
+**/.pytest_cache/
+backend/.env
+backend/output/
+backend/venv/
+**/*.db
+**/*.sqlite3
+*.bak
+README.md

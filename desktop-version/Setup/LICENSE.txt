@@ -1,0 +1,16 @@
+ColdLeads B2B Lead Generation & Scraping Platform Software License Agreement
+Version 2.0 (Commercial & Single User Edition)
+
+Copyright (c) 2026 ColdLeads. All rights reserved.
+
+1. GRANT OF LICENSE:
+This software is licensed, not sold. You are granted a personal, non-exclusive, non-transferable license to install and use ColdLeads B2B Scraper on compatible Windows operating systems.
+
+2. RESTRICTIONS:
+You may not reverse engineer, decompile, or disassemble this software, except and only to the extent that such activity is expressly permitted by applicable law.
+
+3. DATA & COMPLIANCE:
+You agree to use this software in compliance with all applicable local and international regulations, including CAN-SPAM, GDPR, and data protection guidelines.
+
+4. DISCLAIMER OF WARRANTY:
+This software is provided "AS IS" without warranty of any kind, either expressed or implied.
