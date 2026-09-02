@@ -10,6 +10,7 @@ import socket
 import threading
 import subprocess
 import webbrowser
+import traceback
 
 # Locate backend and frontend directories relative to the installation
 SETUP_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -29,6 +30,26 @@ if getattr(sys, "frozen", False):
 
 if BACKEND_DIR not in sys.path:
     sys.path.insert(0, BACKEND_DIR)
+
+# Explicit top-level imports for PyInstaller packaging
+try:
+    import pandas as pd
+    import openpyxl
+    import requests
+    import httpx
+    import fastapi
+    import uvicorn
+    import pydantic
+    import selenium
+    import dotenv
+    import jose
+    import bcrypt
+    import psutil
+    import sqlite3
+    import smtplib
+    import ssl
+except Exception as e:
+    print(f"[!] Pre-import warning: {e}")
 
 
 def find_free_port(preferred_port: int = 8000) -> int:
@@ -50,7 +71,23 @@ def start_backend_server(port: int):
         from main import app
         uvicorn.run(app, host="127.0.0.1", port=port, log_level="warning")
     except Exception as e:
-        print(f"[!] Server error: {e}")
+        print(f"[!] Backend server error: {e}")
+        traceback.print_exc()
+
+
+def wait_for_server_ready(port: int, max_seconds: float = 15.0) -> bool:
+    """Wait until backend server is actively accepting connections."""
+    start_time = time.time()
+    while time.time() - start_time < max_seconds:
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                s.settimeout(0.5)
+                if s.connect_ex(("127.0.0.1", port)) == 0:
+                    return True
+        except Exception:
+            pass
+        time.sleep(0.2)
+    return False
 
 
 def launch_desktop_window(url: str):
@@ -92,6 +129,7 @@ def main():
     app_url = f"http://127.0.0.1:{port}"
 
     # Start FastAPI backend in background thread
+    print(f"[*] Starting local backend on port {port}...")
     server_thread = threading.Thread(
         target=start_backend_server,
         args=(port,),
@@ -100,15 +138,17 @@ def main():
     )
     server_thread.start()
 
-    # Wait briefly for server startup
-    time.sleep(1.2)
-    print(f"[*] Backend server started at {app_url}")
-    print("[*] Opening ColdLeads Desktop Window...")
+    # Wait for server to be fully ready before opening UI
+    print("[*] Waiting for backend server to initialize...")
+    if wait_for_server_ready(port, max_seconds=15.0):
+        print(f"[OK] Backend server active at {app_url}")
+    else:
+        print("[!] Backend server took longer than expected, attempting UI launch...")
 
-    # Launch desktop application window
+    print("[*] Opening ColdLeads Desktop Window...")
     launch_desktop_window(app_url)
 
-    print("[*] ColdLeads is running. Press Ctrl+C in this console to exit.")
+    print("[OK] ColdLeads is running. Press Ctrl+C in this console to exit.")
     try:
         while True:
             time.sleep(1)
