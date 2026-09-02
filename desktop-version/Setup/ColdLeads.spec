@@ -3,7 +3,9 @@ from PyInstaller.utils.hooks import collect_all
 
 datas = [('C:/Users/DELL/Desktop/scrape final/scrape final/new scraper/scrape/frontend/dist', 'frontend/dist'), ('C:/Users/DELL/Desktop/scrape final/scrape final/new scraper/scrape/backend/extra_locations.py', '.'), ('C:/Users/DELL/Desktop/scrape final/scrape final/new scraper/scrape/backend/locations.py', '.'), ('C:/Users/DELL/Desktop/scrape final/scrape final/new scraper/scrape/backend/scraper_api.py', '.'), ('C:/Users/DELL/Desktop/scrape final/scrape final/new scraper/scrape/backend/database.py', '.'), ('C:/Users/DELL/Desktop/scrape final/scrape final/new scraper/scrape/backend/smtp_service.py', '.'), ('C:/Users/DELL/Desktop/scrape final/scrape final/new scraper/scrape/backend/auth.py', '.'), ('C:/Users/DELL/Desktop/scrape final/scrape final/new scraper/scrape/backend/main.py', '.')]
 binaries = []
-hiddenimports = ['uvicorn.logging', 'uvicorn.loops', 'uvicorn.loops.auto', 'uvicorn.protocols', 'uvicorn.protocols.http', 'uvicorn.protocols.http.auto', 'uvicorn.protocols.websockets', 'uvicorn.protocols.websockets.auto']
+hiddenimports = ['uvicorn.logging', 'uvicorn.loops', 'uvicorn.loops.auto', 'uvicorn.protocols', 'uvicorn.protocols.http', 'uvicorn.protocols.http.auto', 'uvicorn.protocols.websockets', 'uvicorn.protocols.websockets.auto', 'email', 'email.mime', 'email.mime.multipart', 'email.mime.text', 'email.mime.base', 'email.mime.application', 'email.mime.image', 'email.mime.audio', 'email.header', 'email.utils', 'email.encoders', 'email.parser', 'email.generator', 'email.policy', 'smtplib', 'ssl']
+tmp_ret = collect_all('email')
+datas += tmp_ret[0]; binaries += tmp_ret[1]; hiddenimports += tmp_ret[2]
 tmp_ret = collect_all('pandas')
 datas += tmp_ret[0]; binaries += tmp_ret[1]; hiddenimports += tmp_ret[2]
 tmp_ret = collect_all('openpyxl')

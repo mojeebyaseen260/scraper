@@ -33,6 +33,29 @@ if BACKEND_DIR not in sys.path:
 
 # Explicit top-level imports for PyInstaller packaging
 try:
+    import email
+    import email.mime
+    import email.mime.multipart
+    import email.mime.text
+    import email.mime.base
+    import email.mime.application
+    import email.mime.image
+    import email.mime.audio
+    import email.header
+    import email.utils
+    import email.encoders
+    import email.parser
+    import email.generator
+    import email.policy
+    import smtplib
+    import ssl
+    import sqlite3
+    import queue
+    import concurrent.futures
+    import ipaddress
+    import html
+    import urllib.parse
+    import urllib.request
     import pandas as pd
     import openpyxl
     import requests
@@ -45,9 +68,6 @@ try:
     import jose
     import bcrypt
     import psutil
-    import sqlite3
-    import smtplib
-    import ssl
 except Exception as e:
     print(f"[!] Pre-import warning: {e}")
 
