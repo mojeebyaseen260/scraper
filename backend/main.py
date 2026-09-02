@@ -1099,7 +1099,10 @@ def get_outreach_history_route(current_user: dict = Depends(get_current_user)):
 
 # ── Serve React frontend (production) ─────────────────────
 if getattr(sys, "frozen", False):
-    _FRONTEND_DIST = os.path.join(sys._MEIPASS, "frontend", "dist")
+    _BUNDLE = getattr(sys, "_MEIPASS", os.path.dirname(sys.executable))
+    _FRONTEND_DIST = os.path.join(_BUNDLE, "frontend", "dist")
+    if not os.path.isdir(_FRONTEND_DIST):
+        _FRONTEND_DIST = os.path.join(os.path.dirname(sys.executable), "_internal", "frontend", "dist")
 else:
     _FRONTEND_DIST = os.path.join(os.path.dirname(__file__), "..", "frontend", "dist")
 

@@ -19,11 +19,13 @@ PROJECT_DIR = os.path.dirname(DESKTOP_DIR)
 BACKEND_DIR = os.path.join(PROJECT_DIR, "backend")
 FRONTEND_DIST = os.path.join(PROJECT_DIR, "frontend", "dist")
 
-# If bundled via PyInstaller, use sys._MEIPASS
+# If bundled via PyInstaller, use sys._MEIPASS or _internal folder
 if getattr(sys, "frozen", False):
-    BUNDLE_DIR = sys._MEIPASS
+    BUNDLE_DIR = getattr(sys, "_MEIPASS", os.path.dirname(sys.executable))
     BACKEND_DIR = BUNDLE_DIR
     FRONTEND_DIST = os.path.join(BUNDLE_DIR, "frontend", "dist")
+    if not os.path.isdir(FRONTEND_DIST):
+        FRONTEND_DIST = os.path.join(os.path.dirname(sys.executable), "_internal", "frontend", "dist")
 
 if BACKEND_DIR not in sys.path:
     sys.path.insert(0, BACKEND_DIR)

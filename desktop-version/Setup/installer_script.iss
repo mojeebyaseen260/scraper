@@ -1,14 +1,12 @@
-; Inno Setup Script for ColdLeads B2B Scraper
-; Compiles dist\ColdLeads directory into ColdLeads-Setup.exe
-
-#define MyAppName "ColdLeads B2B Scraper"
+; Inno Setup Script for ColdLeads B2B Lead Scraper & Outreach Engine
+#define MyAppName "ColdLeads"
 #define MyAppVersion "2.0.0"
-#define MyAppPublisher "ColdLeads Inc."
-#define MyAppURL "https://coldleads.io"
+#define MyAppPublisher "ColdLeads Software"
+#define MyAppURL "https://scraper-eight-virid.vercel.app"
 #define MyAppExeName "ColdLeads.exe"
 
 [Setup]
-AppId={{67ECF25C-09EB-4124-9D5E-9C865E16E3F7}
+AppId={{A7E294B1-D62F-46BE-99A4-F2D72605E412}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
@@ -17,19 +15,20 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={autopf}\{#MyAppName}
 DisableProgramGroupPage=yes
-LicenseFile=LICENSE.txt
+PrivilegesRequired=lowest
 OutputDir=Output
 OutputBaseFilename=ColdLeads-Setup
 Compression=lzma2/ultra64
 SolidCompression=yes
 WizardStyle=modern
 ArchitecturesInstallIn64BitMode=x64
+UninstallDisplayIcon={app}\{#MyAppExeName}
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Tasks]
-Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
 
 [Files]
 Source: "dist\ColdLeads\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
