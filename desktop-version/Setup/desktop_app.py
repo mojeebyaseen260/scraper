@@ -13,9 +13,8 @@ import webbrowser
 
 # Locate backend and frontend directories relative to the installation
 SETUP_DIR = os.path.dirname(os.path.abspath(__file__))
-DESKTOP_ROOT = os.path.dirname(SETUP_DIR)
-WORKSPACE_ROOT = os.path.dirname(DESKTOP_ROOT)
-PROJECT_DIR = os.path.join(WORKSPACE_ROOT, "new scraper", "scrape")
+DESKTOP_DIR = os.path.dirname(SETUP_DIR)
+PROJECT_DIR = os.path.dirname(DESKTOP_DIR)
 
 BACKEND_DIR = os.path.join(PROJECT_DIR, "backend")
 FRONTEND_DIST = os.path.join(PROJECT_DIR, "frontend", "dist")

@@ -1098,7 +1098,11 @@ def get_outreach_history_route(current_user: dict = Depends(get_current_user)):
 
 
 # ── Serve React frontend (production) ─────────────────────
-_FRONTEND_DIST = os.path.join(os.path.dirname(__file__), "..", "frontend", "dist")
+if getattr(sys, "frozen", False):
+    _FRONTEND_DIST = os.path.join(sys._MEIPASS, "frontend", "dist")
+else:
+    _FRONTEND_DIST = os.path.join(os.path.dirname(__file__), "..", "frontend", "dist")
+
 if os.path.isdir(_FRONTEND_DIST):
     # Serve static assets (js, css, images)
     app.mount("/assets", StaticFiles(directory=os.path.join(_FRONTEND_DIST, "assets")), name="assets")
